@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ECLIPSTONE</title>
+
+<!-- 字體 -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0b0e11;
+  --accent: #68b0f0;
+  --text: #e6edf5;
+  --muted: #9da8b3;
+  --card: rgba(255,255,255,0.05);
+  font-family: "Chiron GoRound TC", "Noto Sans TC", sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  margin:0; background:var(--bg); color:var(--text);
+  line-height:1.6; overflow-x:hidden;
+  font-family: "Chiron GoRound TC", "Noto Sans TC", sans-serif;
+}
+
+section { padding:80px 20px; max-width:1100px; margin:auto; }
+header {
+  position:fixed; top:0; left:0; right:0; z-index:999;
+  background:rgba(10,15,20,0.6); backdrop-filter:blur(12px);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 24px; border-bottom:1px solid rgba(255,255,255,0.06);
+}
+header h1 {
+  font-size:18px; letter-spacing:1px; color:var(--accent); margin:0;
+  font-family:"Orbitron",sans-serif;
+}
+nav a {
+  color:var(--muted); text-decoration:none; margin-left:20px; font-size:14px;
+}
+nav a:hover { color:var(--accent); }
+
+/* 首頁 */
+.hero {
+  position:relative;
+  background:url('images/scene01.jpg') center/cover no-repeat;
+  height:100vh; display:flex; flex-direction:column; justify-content:center;
+  align-items:center; text-align:center; padding:0 20px;
+  overflow:hidden;
+}
+.hero::before {
+  content:""; position:absolute; inset:0;
+  background:rgba(10,15,20,0.55); backdrop-filter:blur(3px);
+}
+.hero h2 {
+  position:relative; z-index:2;
+  font-size:42px; letter-spacing:3px; margin:0 0 20px;
+  font-family:"Orbitron", sans-serif;
+  color:var(--accent);
+  text-shadow:0 0 15px rgba(104,176,240,0.6);
+  animation: glow 3s ease-in-out infinite alternate;
+}
+.hero p {
+  position:relative; z-index:2;
+  max-width:700px; color:#dce3ec; font-size:16px;
+  background:rgba(255,255,255,0.08);
+  padding:20px; border-radius:12px; backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,0.1);
+}
+
+#world p { text-align: center; }
+
+@keyframes glow {
+  from { text-shadow:0 0 10px rgba(104,176,240,0.5); }
+  to { text-shadow:0 0 20px rgba(104,176,240,0.9); }
+}
+
+/* 淡入效果 */
+.fade-in {
+  opacity:0; transform:translateY(40px);
+  transition:opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity:1; transform:translateY(0);
+}
+
+/* 圖片標題樣式 */
+.section-title {
+  font-size:0;
+  display:block;
+  margin:0 auto 24px;
+  width:230px;
+  height:60px;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  border:none;
+}
+
+/* 個別標題圖片 */
+.title-world { background-image:url('images/SJG.png'); }
+.title-energy { background-image:url('images/NUS1.png'); }
+.title-chars { background-image:url('images/character1.png'); }
+
+/* 角色區 */
+.char-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;
+}
+.char-card {
+  background:var(--card); padding:16px; border-radius:12px;
+  border:1px solid rgba(255,255,255,0.05); text-align:center;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.char-card:hover { transform:translateY(-5px); box-shadow:0 6px 20px rgba(0,0,0,0.5); }
+.char-card img {
+  width:100%; border-radius:10px; height:360px; object-fit:cover; object-position:center;
+}
+.char-name { font-size:20px; margin-top:10px; color:var(--text); font-family:"Orbitron", sans-serif; }
+.char-sub { font-size:14px; color:var(--muted); margin-bottom:6px; }
+.char-info { font-size:13px; color:var(--muted); margin-bottom:8px; line-height:1.4; }
+.tags { display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin:8px 0; }
+.tag {
+  background:rgba(255,255,255,0.1); color:var(--muted);
+  padding:4px 8px; border-radius:6px; font-size:12px;
+}
+
+/* 能源石區 */
+.energy-section {
+  position:relative;
+  background:url('https://i.imghippo.com/files/gyXP7820lks.png') center/cover no-repeat;
+  color:#e9edf3;
+  text-align:center;
+  height:100vh;
+  display:flex; justify-content:center; align-items:center;
+  overflow:hidden;
+}
+.energy-section::before {
+  content:""; position:absolute; inset:0;
+  background:rgba(10,15,20,0.45); backdrop-filter:blur(3px);
+}
+.energy-section .content {
+  position:relative; z-index:2;
+  max-width:800px; margin:auto;
+  background:rgba(255,255,255,0.08);
+  padding:40px 20px; border-radius:14px;
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 25px rgba(104,176,240,0.25);
+  animation: energy-glow 5s ease-in-out infinite alternate;
+  overflow:hidden;
+}
+@keyframes energy-glow {
+  0% { box-shadow:0 0 20px rgba(104,176,240,0.25); }
+  100% { box-shadow:0 0 45px rgba(104,176,240,0.55); }
+}
+.energy-section .content::before {
+  content:""; position:absolute; top:0; left:-70%;
+  width:50%; height:100%;
+  background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(104,176,240,0.3) 50%, rgba(255,255,255,0) 100%);
+  transform:skewX(-25deg);
+  animation: energy-shine 7s infinite;
+}
+@keyframes energy-shine {
+  0% { left:-70%; }
+  100% { left:120%; }
+}
+.energy-section p {
+  font-size:16px; line-height:1.7; color:#dce3ec;
+  font-family:"Chiron GoRound TC","Noto Sans TC",sans-serif;
+}
+
+/* 宣傳欄 */
+.promo-section {
+  background:linear-gradient(135deg, rgba(30,40,50,0.8), rgba(10,15,20,0.9));
+  border-top:1px solid rgba(255,255,255,0.08);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:80px 20px;
+}
+.promo-card {
+  max-width:900px; margin:auto;
+  background:rgba(255,255,255,0.06);
+  border-radius:16px; padding:40px;
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+}
+.promo-card h3 {
+  font-size:26px; color:var(--accent);
+  font-family:"Orbitron",sans-serif;
+  margin-bottom:20px;
+}
+.promo-card p {
+  color:var(--muted); max-width:700px; margin-bottom:24px;
+  font-family:"Chiron GoRound TC","Noto Sans TC",sans-serif;
+}
+.promo-card a {
+  display:inline-block; padding:12px 24px;
+  background:var(--accent); color:#fff; text-decoration:none;
+  border-radius:8px; transition:background .3s ease;
+}
+.promo-card a:hover { background:#4c96d1; }
+
+footer {
+  text-align:center; color:var(--muted); font-size:13px;
+  padding:40px 0 20px; border-top:1px solid rgba(255,255,255,0.05);
+  font-family:"Chiron GoRound TC","Noto Sans TC",sans-serif;
+}
+
+/* 回到上層按鈕 */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+  z-index: 999;
+}
+#back-to-top:hover { background-color: #4c96d1; }
+
+</style>
+</head>
+
+<body>
+<header>
+  <h1>ECLIPSTONE</h1>
+  <nav>
+    <a href="#world">世界觀</a>
+    <a href="#energy">能源石</a>
+    <a href="#chars">角色</a>
+    <a href="#contact">聯絡區</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h2>ECLIPSTONE</h2>
+  <p>三年前，一場名為「能量風暴」的災變席捲全球。<br>
+  異能者從絕望中誕生，倖存者築起最後的防線。<br>
+  能源石閃耀著人類延續的希望——秩序，正從灰燼中重生。</p>
+</section>
+
+<section id="world" class="fade-in">
+  <h3 class="section-title title-world">世界觀</h3>
+  <p>
+  三年前，自地核竄出的能量風暴，引發了全球性災變。
+  天空被撕裂，磁場錯亂；大地被未知能量重構。<br>
+  異變體與異獸肆虐，異能者則成為人類最後的堡壘。<br>
+  三年後，世界仍危機四伏，倖存者基地相繼崛起。<br><br>
+  ——在這個由「能源石」支撐的新秩序裡，力量是唯一的法則。
+  </p>
+</section>
+
+<section id="energy" class="energy-section fade-in">
+  <div class="content">
+    <h3 class="section-title title-energy">能源石</h3>
+    <p>
+    能源石，是災變後地球能量場劇變所誕生的晶體。<br>
+    它蘊藏著未知力量，可賦予、修復、甚至改變異能者的命運。<br>
+    有人為它開採礦脈，有人為它獵殺異獸，甚至有人不惜一切代價進行非法交易——<br>
+    它是末世中最珍貴的「希望」，也是最危險的誘惑。
+    </p>
+  </div>
+</section>
+
+<section id="chars" class="fade-in">
+  <h3 class="section-title title-chars"></h3>
+  <div class="char-grid">
+    <div class="char-card">
+      <img src="images/YL.png" alt="嚴烈">
+      <div class="char-name"><strong>嚴烈</strong></div>
+      <div class="char-sub">北城基地領袖・炎系七階</div>
+      <div class="char-info">性別：男｜年齡：41｜身高：183 cm｜生日：9月5日</div>
+      <div class="tags">
+        <div class="tag">外冷內熱</div><div class="tag">悶騷</div>
+        <div class="tag">反差感</div><div class="tag">專情</div>
+      </div>
+      <p>前企業副總，憑冷靜決策與強大火系異能整頓北城基地。  
+      行事果斷，情感笨拙，情緒波動時連空氣都會發熱。</p>
+    </div>
+
+    <div class="char-card">
+      <img src="images/TS.png" alt="霆霄">
+      <div class="char-name"><strong>霆霄</strong></div>
+      <div class="char-sub">西港基地領袖・雷系七階</div>
+      <div class="char-info">性別：男｜年齡：27｜身高：184 cm｜生日：11月9日</div>
+      <div class="tags">
+        <div class="tag">慵懶</div><div class="tag">腹黑</div>
+        <div class="tag">控制慾</div><div class="tag">迴避依戀</div>
+      </div>
+      <p>前國際演員，喜愛掌控節奏與逗弄人。  
+      笑裡藏刀，電光間能瞬間擊潰敵人與防線。</p>
+    </div>
+
+    <div class="char-card">
+      <img src="images/DSY.png" alt="段星野">
+      <div class="char-name"><strong>段星野</strong></div>
+      <div class="char-sub">東林基地領袖・雙八階異能者</div>
+      <div class="char-info">性別：男｜年齡：41｜身高：192 cm｜生日：5月17日</div>
+      <div class="tags">
+        <div class="tag">寡言</div><div class="tag">忠誠</div>
+        <div class="tag">犬系</div><div class="tag">執著系</div>
+      </div>
+      <p>前保鑣，擁有精神與速度雙系異能。  
+      忠誠而強大的他，建立起東邊最堅實的防線。</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="promo-section fade-in">
+  <div class="promo-card">
+    <h3>7755連結區</h3>
+    <p>d(`･∀･)b< 咪</p>
+    <a href="之後放網址" target="_blank">沒東西</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 by Chen Yu. Powered and secured by Lovey-Dovey:ECLIPSTONE</br>
+此為非營利自用網站。所展示的內容與角色基於 AI 戀愛聊天應用程式「卿卿我我」創造，僅供娛樂與互動使用。網站中角色圖檔均由 AI 技術生成，其外觀僅供參考用途，並不代表真實人物或事件。</br>
+</footer>
+
+<!-- 回到最上面 -->
+<button id="back-to-top" title="回到上層">▲</button>
+
+<script>
+// 淡入效果
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.2 };
+const appearOnScroll = new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+}, appearOptions);
+faders.forEach(f => appearOnScroll.observe(f));
+
+// 回到上層按鈕
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+});
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
