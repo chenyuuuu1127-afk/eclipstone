@@ -127,7 +127,7 @@ nav.mobile-active a:hover { color:var(--accent); }
 
 /* RWD：小螢幕 */
 @media (max-width: 768px) {
-  nav { display:none; }
+  nav:not(.mobile-active) { display:none; }  /* ← 加上 :not() */
   .menu-toggle { display:flex; }
   nav.mobile-active { display:flex; }
 }
