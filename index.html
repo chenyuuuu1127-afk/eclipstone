@@ -29,6 +29,8 @@ body {
 }
 
 section { padding:80px 20px; max-width:1100px; margin:auto; }
+
+/* 最上面ㄉ導覽列 */
 header {
   position:fixed; top:0; left:0; right:0; z-index:999;
   background:rgba(10,15,20,0.6); backdrop-filter:blur(12px);
@@ -39,12 +41,98 @@ header h1 {
   font-size:18px; letter-spacing:1px; color:var(--accent); margin:0;
   font-family:"Orbitron",sans-serif;
 }
+nav {
+  display:flex; align-items:center;
+}
 nav a {
   color:var(--muted); text-decoration:none; margin-left:20px; font-size:14px;
 }
 nav a:hover { color:var(--accent); }
 
-/* 首頁 */
+/* ====== 選單測試 ====== */
+.menu-toggle {
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  width:28px; height:24px;
+  cursor:pointer;
+}
+.menu-toggle span {
+  height:3px;
+  background:var(--accent);
+  margin:4px 0;
+  border-radius:2px;
+  transition:all 0.4s ease;
+}
+.menu-toggle.active span:nth-child(1) {
+  transform:translateY(7px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+  opacity:0;
+}
+.menu-toggle.active span:nth-child(3) {
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+/* 手機選單 */
+.menu-toggle {
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  width:30px; height:26px;
+  cursor:pointer;
+  transition:transform 0.3s ease;
+}
+.menu-toggle:hover { transform:scale(1.1); }
+.menu-toggle span {
+  height:3px; width:100%;
+  background:var(--accent);
+  margin:4px 0;
+  border-radius:2px;
+  box-shadow:0 0 6px rgba(104,176,240,0.6);
+  transition:all 0.4s ease;
+}
+.menu-toggle.active span:nth-child(1) {
+  transform:translateY(7px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) { opacity:0; }
+.menu-toggle.active span:nth-child(3) {
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+/* 手機展開選單 */
+nav.mobile-active {
+  position:absolute;
+  top:65px; right:18px;
+  background:rgba(15,20,25,0.95);
+  flex-direction:column;
+  border-radius:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.45);
+  padding:18px 24px;
+  animation: dropdown 0.35s ease forwards;
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.08);
+}
+@keyframes dropdown {
+  from { opacity:0; transform:translateY(-12px); }
+  to { opacity:1; transform:translateY(0); }
+}
+nav.mobile-active a {
+  margin:10px 0; color:var(--text);
+  text-align:center; font-size:15px;
+  letter-spacing:1px;
+  transition:color 0.2s ease;
+}
+nav.mobile-active a:hover { color:var(--accent); }
+
+/* RWD：小螢幕 */
+@media (max-width: 768px) {
+  nav { display:none; }
+  .menu-toggle { display:flex; }
+  nav.mobile-active { display:flex; }
+}
+
+/* ====== 首頁 ====== */
 .hero {
   position:relative;
   background:url('images/scene01.jpg') center/cover no-repeat;
@@ -79,7 +167,7 @@ nav a:hover { color:var(--accent); }
   to { text-shadow:0 0 20px rgba(104,176,240,0.9); }
 }
 
-/* 淡入效果 */
+/* ====== 淡入效果 ====== */
 .fade-in {
   opacity:0; transform:translateY(40px);
   transition:opacity 0.8s ease, transform 0.8s ease;
@@ -88,6 +176,7 @@ nav a:hover { color:var(--accent); }
   opacity:1; transform:translateY(0);
 }
 
+/* ====== 其他區塊 ====== */
 /* 圖片標題樣式 */
 .section-title {
   font-size:0;
@@ -100,8 +189,6 @@ nav a:hover { color:var(--accent); }
   background-position:center;
   border:none;
 }
-
-/* 個別標題圖片 */
 .title-world { background-image:url('images/SJG.png'); }
 .title-energy { background-image:url('images/NUS1.png'); }
 .title-chars { background-image:url('images/character1.png'); }
@@ -134,7 +221,7 @@ nav a:hover { color:var(--accent); }
   background:url('https://i.imghippo.com/files/gyXP7820lks.png') center/cover no-repeat;
   color:#e9edf3;
   text-align:center;
-  height:100vh;
+  min-height:700px;
   display:flex; justify-content:center; align-items:center;
   overflow:hidden;
 }
@@ -151,26 +238,10 @@ nav a:hover { color:var(--accent); }
   backdrop-filter:blur(8px);
   box-shadow:0 0 25px rgba(104,176,240,0.25);
   animation: energy-glow 5s ease-in-out infinite alternate;
-  overflow:hidden;
 }
 @keyframes energy-glow {
   0% { box-shadow:0 0 20px rgba(104,176,240,0.25); }
   100% { box-shadow:0 0 45px rgba(104,176,240,0.55); }
-}
-.energy-section .content::before {
-  content:""; position:absolute; top:0; left:-70%;
-  width:50%; height:100%;
-  background:linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(104,176,240,0.3) 50%, rgba(255,255,255,0) 100%);
-  transform:skewX(-25deg);
-  animation: energy-shine 7s infinite;
-}
-@keyframes energy-shine {
-  0% { left:-70%; }
-  100% { left:120%; }
-}
-.energy-section p {
-  font-size:16px; line-height:1.7; color:#dce3ec;
-  font-family:"Chiron GoRound TC","Noto Sans TC",sans-serif;
 }
 
 /* 宣傳欄 */
@@ -195,7 +266,6 @@ nav a:hover { color:var(--accent); }
 }
 .promo-card p {
   color:var(--muted); max-width:700px; margin-bottom:24px;
-  font-family:"Chiron GoRound TC","Noto Sans TC",sans-serif;
 }
 .promo-card a {
   display:inline-block; padding:12px 24px;
@@ -207,7 +277,6 @@ nav a:hover { color:var(--accent); }
 footer {
   text-align:center; color:var(--muted); font-size:13px;
   padding:40px 0 20px; border-top:1px solid rgba(255,255,255,0.05);
-  font-family:"Chiron GoRound TC","Noto Sans TC",sans-serif;
 }
 
 /* 回到上層按鈕 */
@@ -229,14 +298,19 @@ footer {
   z-index: 999;
 }
 #back-to-top:hover { background-color: #4c96d1; }
-
 </style>
 </head>
 
 <body>
 <header>
   <h1>ECLIPSTONE</h1>
-  <nav>
+
+  <!-- 手機ㄉ選單用  -->
+  <div class="menu-toggle" id="menu-toggle">
+    <span></span><span></span><span></span>
+  </div>
+
+  <nav id="nav">
     <a href="#world">世界觀</a>
     <a href="#energy">能源石</a>
     <a href="#chars">角色</a>
@@ -244,6 +318,7 @@ footer {
   </nav>
 </header>
 
+<!-- 簡介用 -->
 <section class="hero" id="home">
   <h2>ECLIPSTONE</h2>
   <p>三年前，一場名為「能量風暴」的災變席捲全球。<br>
@@ -253,24 +328,18 @@ footer {
 
 <section id="world" class="fade-in">
   <h3 class="section-title title-world">世界觀</h3>
-  <p>
-  三年前，自地核竄出的能量風暴，引發了全球性災變。
+  <p>三年前，自地核竄出的能量風暴，引發了全球性災變。<br>
   天空被撕裂，磁場錯亂；大地被未知能量重構。<br>
-  異變體與異獸肆虐，異能者則成為人類最後的堡壘。<br>
-  三年後，世界仍危機四伏，倖存者基地相繼崛起。<br><br>
-  ——在這個由「能源石」支撐的新秩序裡，力量是唯一的法則。
-  </p>
+  異變體與異獸肆虐，異能者則成為人類最後的堡壘。<br><br>
+  ——在這個由「能源石」支撐的新秩序裡，力量是唯一的法則。</p>
 </section>
 
 <section id="energy" class="energy-section fade-in">
   <div class="content">
     <h3 class="section-title title-energy">能源石</h3>
-    <p>
-    能源石，是災變後地球能量場劇變所誕生的晶體。<br>
+    <p>能源石，是災變後地球能量場劇變所誕生的晶體。<br>
     它蘊藏著未知力量，可賦予、修復、甚至改變異能者的命運。<br>
-    有人為它開採礦脈，有人為它獵殺異獸，甚至有人不惜一切代價進行非法交易——<br>
-    它是末世中最珍貴的「希望」，也是最危險的誘惑。
-    </p>
+    它是末世中最珍貴的「希望」，也是最危險的誘惑。</p>
   </div>
 </section>
 
@@ -322,16 +391,12 @@ footer {
   <div class="promo-card">
     <h3>7755連結區</h3>
     <p>d(`･∀･)b< 咪</p>
-    <a href="之後放網址" target="_blank">沒東西</a>
+    <a href="#" target="_blank">沒東西</a>
   </div>
 </section>
 
-<footer>
-  © 2025 by Chen Yu. Powered and secured by Lovey-Dovey:ECLIPSTONE</br>
-此為非營利自用網站。所展示的內容與角色基於 AI 戀愛聊天應用程式「卿卿我我」創造，僅供娛樂與互動使用。網站中角色圖檔均由 AI 技術生成，其外觀僅供參考用途，並不代表真實人物或事件。</br>
-</footer>
+<footer>© 2025 by Chen Yu. Powered and secured by Lovey-Dovey:ECLIPSTONE</footer>
 
-<!-- 回到最上面 -->
 <button id="back-to-top" title="回到上層">▲</button>
 
 <script>
@@ -355,6 +420,14 @@ window.addEventListener('scroll', () => {
 });
 backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// === 選單互動 ===
+const menuToggle = document.getElementById('menu-toggle');
+const nav = document.getElementById('nav');
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
+  nav.classList.toggle('mobile-active');
 });
 </script>
 </body>
