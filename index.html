@@ -74,7 +74,7 @@ nav a:hover { color:var(--accent); }
   transform:translateY(-7px) rotate(-45deg);
 }
 
-/* 手機選單 */
+/* ==== 手機選單 ==== */
 .menu-toggle {
   display:none;
   flex-direction:column;
@@ -100,7 +100,7 @@ nav a:hover { color:var(--accent); }
   transform:translateY(-7px) rotate(-45deg);
 }
 
-/* 手機展開選單 */
+/* 手機選單(展開ㄉ) */
 nav.mobile-active {
   position:absolute;
   top:65px; right:18px;
@@ -125,7 +125,7 @@ nav.mobile-active a {
 }
 nav.mobile-active a:hover { color:var(--accent); }
 
-/* RWD：小螢幕 */
+/* 小螢幕ㄉ */
 @media (max-width: 768px) {
   nav:not(.mobile-active) { display:none; }  /* ← 加上 :not() */
   .menu-toggle { display:flex; }
@@ -176,8 +176,8 @@ nav.mobile-active a:hover { color:var(--accent); }
   opacity:1; transform:translateY(0);
 }
 
-/* ====== 其他區塊 ====== */
-/* 圖片標題樣式 */
+/* ============ */
+/* 圖片標題網址區 */
 .section-title {
   font-size:0;
   display:block;
@@ -215,7 +215,7 @@ nav.mobile-active a:hover { color:var(--accent); }
   padding:4px 8px; border-radius:6px; font-size:12px;
 }
 
-/* 能源石區 */
+/* 俗頭介紹區 */
 .energy-section {
   position:relative;
   background:url('https://i.imghippo.com/files/gyXP7820lks.png') center/cover no-repeat;
@@ -244,7 +244,7 @@ nav.mobile-active a:hover { color:var(--accent); }
   100% { box-shadow:0 0 45px rgba(104,176,240,0.55); }
 }
 
-/* 宣傳欄 */
+/* 75宣傳用 */
 .promo-section {
   background:linear-gradient(135deg, rgba(30,40,50,0.8), rgba(10,15,20,0.9));
   border-top:1px solid rgba(255,255,255,0.08);
@@ -376,7 +376,7 @@ footer {
       <img src="images/DSY.png" alt="段星野">
       <div class="char-name"><strong>段星野</strong></div>
       <div class="char-sub">東林基地領袖・雙八階異能者</div>
-      <div class="char-info">性別：男｜年齡：41｜身高：192 cm｜生日：5月17日</div>
+      <div class="char-info">性別：男｜年齡：24｜身高：192 cm｜生日：5月17日</div>
       <div class="tags">
         <div class="tag">寡言</div><div class="tag">忠誠</div>
         <div class="tag">犬系</div><div class="tag">執著系</div>
@@ -422,7 +422,7 @@ backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// === 選單互動 ===
+// 選單互動用
 const menuToggle = document.getElementById('menu-toggle');
 const nav = document.getElementById('nav');
 menuToggle.addEventListener('click', () => {
@@ -432,3 +432,4 @@ menuToggle.addEventListener('click', () => {
 </script>
 </body>
 </html>
+
