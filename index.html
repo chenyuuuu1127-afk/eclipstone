@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+  <script>
+  // 🚪 若未驗證年齡，強制導向年齡確認頁
+  if (!localStorage.getItem('ageVerified')) {
+    window.location.href = "agecheck.html";
+  }
+</script>
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>ECLIPSTONE</title>
@@ -432,4 +439,5 @@ menuToggle.addEventListener('click', () => {
 </script>
 </body>
 </html>
+
 
