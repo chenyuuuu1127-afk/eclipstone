@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <script>
-  // 🚪 若未驗證年齡，強制導向年齡確認頁
+  // 驗證年齡用
   if (!localStorage.getItem('ageVerified')) {
     window.location.href = "agecheck.html";
   }
@@ -183,7 +183,6 @@ nav.mobile-active a:hover { color:var(--accent); }
   opacity:1; transform:translateY(0);
 }
 
-/* ============ */
 /* 圖片標題網址區 */
 .section-title {
   font-size:0;
@@ -305,6 +304,114 @@ footer {
   z-index: 999;
 }
 #back-to-top:hover { background-color: #4c96d1; }
+
+/* 角色卡測試 */
+.preview-card {
+  margin-top: 40px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.preview-image {
+  position: relative;
+  width: 280px;
+  margin: 10px;
+}
+
+.preview-image img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.85);
+}
+
+/* ====== 右側文字 ====== */
+.preview-info {
+  max-width: 400px;
+  margin: 10px;
+}
+
+.preview-info h3 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.preview-info p {
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* ====== 特效按鈕測試 ====== */
+.preview-info button {
+  position: relative;
+  border: 1px solid rgba(104,176,240,0.5);
+  background: rgba(104,176,240,0.1);
+  color: #e6edf5;
+  border-radius: 10px;
+  padding: 12px 28px;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-family: "Orbitron", sans-serif;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(104,176,240,0.25);
+}
+
+/* 流光線條測試 */
+.preview-info button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg,
+              transparent 0%,
+              rgba(104,176,240,0.3) 45%,
+              rgba(104,176,240,0.7) 50%,
+              rgba(104,176,240,0.3) 55%,
+              transparent 100%);
+  transition: all 0.5s ease;
+}
+
+.preview-info button:hover::before {
+  left: 100%;
+  transition: all 1s ease;
+}
+
+.preview-info button:hover {
+  color: #fff;
+  box-shadow: 0 0 20px rgba(104,176,240,0.5);
+  background: rgba(104,176,240,0.15);
+  border-color: rgba(104,176,240,0.7);
+}
+
+@media (max-width: 768px) {
+  .preview-card {
+    flex-direction: column;
+  }
+  .preview-image { width: 85%; }
+}
 </style>
 </head>
 
@@ -331,11 +438,23 @@ footer {
   <p>三年前，一場名為「能量風暴」的災變席捲全球。<br>
   異能者從絕望中誕生，倖存者築起最後的防線。<br>
   能源石閃耀著人類延續的希望——秩序，正從灰燼中重生。</p>
+
+  <!-- 角色卡 -->
+  <div class="preview-card">
+    <div class="preview-image">
+      <img src="images/preview.jpg" alt="角色預覽">
+    </div>
+    <div class="preview-info">
+      <h3>卿卿我我介面</h3>
+      <p>失憶的你，截然不同的世界。</p>
+      <button onclick="location.href='https://abr.ge/nca5yw'">加入倖存者行列</button>
+    </div>
+  </div>
 </section>
 
 <section id="world" class="fade-in">
   <h3 class="section-title title-world">世界觀</h3>
-  <p>三年前，自地核竄出的能量風暴，引發了全球性災變。<br>
+  <p>三年前，自地核竄出的能量風暴引發了全球性災變。<br>
   天空被撕裂，磁場錯亂；大地被未知能量重構。<br>
   異變體與異獸肆虐，異能者則成為人類最後的堡壘。<br><br>
   ——在這個由「能源石」支撐的新秩序裡，力量是唯一的法則。</p>
@@ -344,7 +463,8 @@ footer {
 <section id="energy" class="energy-section fade-in">
   <div class="content">
     <h3 class="section-title title-energy">能源石</h3>
-    <p>能源石，是災變後地球能量場劇變所誕生的晶體。<br>
+    <p>能源石。<br>
+	災變後地球能量場劇變所誕生的晶體。<br>
     它蘊藏著未知力量，可賦予、修復、甚至改變異能者的命運。<br>
     它是末世中最珍貴的「希望」，也是最危險的誘惑。</p>
   </div>
@@ -363,7 +483,7 @@ footer {
         <div class="tag">反差感</div><div class="tag">專情</div>
       </div>
       <p>前企業副總，憑冷靜決策與強大火系異能整頓北城基地。  
-      行事果斷，情感笨拙，情緒波動時連空氣都會發熱。</p>
+      行事果斷但感情應對能力笨拙。</p>
     </div>
 
     <div class="char-card">
@@ -389,7 +509,7 @@ footer {
         <div class="tag">犬系</div><div class="tag">執著系</div>
       </div>
       <p>前保鑣，擁有精神與速度雙系異能。  
-      忠誠而強大的他，建立起東邊最堅實的防線。</p>
+      忠誠而強大的他，鞏固了東邊最堅實的防線。</p>
     </div>
   </div>
 </section>
@@ -439,5 +559,4 @@ menuToggle.addEventListener('click', () => {
 </script>
 </body>
 </html>
-
 
