@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>閱覽確認 | ECLIPSTONE</title>
+
+<style>
+:root {
+  --bg: #0b0e11;
+  --accent: #68b0f0;
+  --text: #e6edf5;
+  --muted: #9da8b3;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(15,25,35,0.95), var(--bg) 90%);
+  color: var(--text);
+  font-family: "Chiron GoRound TC", "Noto Sans TC", sans-serif;
+  overflow: hidden;
+}
+
+/* 標題設定 */
+h2 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--accent);
+  font-size: 28px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(104,176,240,0.5);
+}
+p {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 40px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* 按鈕ㄉ樣式 */
+button {
+  position: relative;
+  background: rgba(104,176,240,0.15);
+  border: 1px solid rgba(104,176,240,0.4);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 14px 28px;
+  margin: 10px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 12px rgba(104,176,240,0.25);
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(104,176,240,0.6), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+button:hover::before { opacity: 0.8; }
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(104,176,240,0.45);
+  color: #fff;
+}
+
+/* 提示框 */
+.notice {
+  position: fixed;
+  bottom: 40px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 16px 28px;
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+  color: var(--muted);
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s ease;
+}
+.notice.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+  <h2>年齡確認</h2>
+  <p>您即將進入的網頁包含可能不怎麼18+的內容。<br>請確認您的年齡以繼續。</p>
+
+  <div>
+    <button onclick="confirmAge(true)">✔ 我是大人了</button>
+    <button onclick="confirmAge(false)">✖ 咕咕嘎嘎</button>
+  </div>
+
+  <div id="notice" class="notice">抱歉，您未達年齡限制，無法瀏覽此內容。</div>
+
+<script>
+function confirmAge(isAdult) {
+  const notice = document.getElementById('notice');
+
+  if (isAdult) {
+    // 年齡通過
+    window.location.href = "index.html";
+  } else {
+    // 未滿18歲
+    notice.classList.add('visible');
+    setTimeout(() => {
+      notice.classList.remove('visible');
+    }, 3000); // 消失ㄉ時間
+  }
+}
+</script>
+</body>
+</html>
