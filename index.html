@@ -285,6 +285,54 @@ footer {
   padding:40px 0 20px; border-top:1px solid rgba(255,255,255,0.05);
 }
 
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 700px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.news-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 14px 18px;
+  backdrop-filter: blur(6px);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item:hover {
+  background: rgba(104,176,240,0.08);
+  box-shadow: 0 0 12px rgba(104,176,240,0.2);
+}
+
+.news-item .date {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.news-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 手機優化 */
+@media (max-width: 768px) {
+  .news-list {
+    gap: 10px;
+  }
+  .news-item {
+    padding: 12px 14px;
+  }
+}
+
 /* 回到上層按鈕 */
 #back-to-top {
   position: fixed;
@@ -508,11 +556,24 @@ footer {
   </div>
 </section>
 
-<section id="contact" class="promo-section fade-in">
+<!-- 最新消息更新區 -->
+<section id="news" class="promo-section fade-in">
   <div class="promo-card">
-    <h3>7755連結區</h3>
-    <p>d(`･∀･)b< 咪</p>
-    <a href="#" target="_blank">沒東西</a>
+    <h3>最新消息</h3>
+    <div class="news-list">
+      <div class="news-item">
+        <span class="date">2025.10.24</span>
+        <p>ECLIPSTONE網站正式上線。</p>
+      </div>
+      <div class="news-item">
+        <span class="date">2025.10.20</span>
+        <p>角色資料建立完成，新增視覺預覽介面。</p>
+      </div>
+      <div class="news-item">
+        <span class="date">2025.10.05</span>
+        <p>世界觀架構完畢。</p>
+      </div>
+    </div>
   </div>
 </section>
 
