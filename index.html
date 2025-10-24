@@ -310,15 +310,14 @@ footer {
   margin-top: 40px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
+  border-radius: 20px;
   overflow: hidden;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 24px;
-  backdrop-filter: blur(6px);
+  padding: 30px;
+  backdrop-filter: blur(8px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -327,46 +326,35 @@ footer {
   box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 
+/* 圓形 */
 .preview-image {
   position: relative;
-  width: 280px;
-  margin: 10px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(104,176,240,0.35);
 }
 
 .preview-image img {
   width: 100%;
-  border-radius: 10px;
+  height: 100%;
   object-fit: cover;
-  object-position: center;
-  filter: brightness(0.85);
+  filter: brightness(0.88);
 }
 
-/* ====== 右側文字 ====== */
+/* 右側按鈕區 */
 .preview-info {
-  max-width: 400px;
-  margin: 10px;
+  margin-left: 40px;
 }
 
-.preview-info h3 {
-  font-family: "Orbitron", sans-serif;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-
-.preview-info p {
-  color: var(--muted);
-  margin-bottom: 16px;
-  font-size: 14px;
-}
-
-/* ====== 特效按鈕測試 ====== */
 .preview-info button {
   position: relative;
   border: 1px solid rgba(104,176,240,0.5);
   background: rgba(104,176,240,0.1);
   color: #e6edf5;
-  border-radius: 10px;
-  padding: 12px 28px;
+  border-radius: 12px;
+  padding: 14px 30px;
   cursor: pointer;
   font-size: 15px;
   letter-spacing: 1px;
@@ -374,10 +362,9 @@ footer {
   transition: all 0.3s ease;
   overflow: hidden;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 12px rgba(104,176,240,0.25);
+  box-shadow: 0 0 15px rgba(104,176,240,0.25);
 }
 
-/* 流光線條測試 */
 .preview-info button::before {
   content: "";
   position: absolute;
@@ -401,16 +388,25 @@ footer {
 
 .preview-info button:hover {
   color: #fff;
-  box-shadow: 0 0 20px rgba(104,176,240,0.5);
+  box-shadow: 0 0 25px rgba(104,176,240,0.6);
   background: rgba(104,176,240,0.15);
   border-color: rgba(104,176,240,0.7);
 }
 
+/* 手機版測試 */
 @media (max-width: 768px) {
   .preview-card {
     flex-direction: column;
+    padding: 24px;
   }
-  .preview-image { width: 85%; }
+  .preview-image {
+    margin-bottom: 20px;
+    width: 200px;
+    height: 200px;
+  }
+  .preview-info {
+    margin-left: 0;
+  }
 }
 </style>
 </head>
@@ -440,16 +436,14 @@ footer {
   能源石閃耀著人類延續的希望——秩序，正從灰燼中重生。</p>
 
   <!-- 角色卡 -->
-  <div class="preview-card">
-    <div class="preview-image">
-      <img src="images/preview.jpg" alt="角色預覽">
-    </div>
-    <div class="preview-info">
-      <h3>卿卿我我介面</h3>
-      <p>失憶的你，截然不同的世界。</p>
-      <button onclick="location.href='https://abr.ge/nca5yw'">加入倖存者行列</button>
-    </div>
+<div class="preview-card">
+  <div class="preview-image">
+    <img src="images/preview.jpg" alt="角色預覽">
   </div>
+  <div class="preview-info">
+    <button onclick="location.href='https://abr.ge/nca5yw'">成為倖存者</button>
+  </div>
+</div>
 </section>
 
 <section id="world" class="fade-in">
