@@ -114,16 +114,18 @@ function confirmAge(isAdult) {
   const notice = document.getElementById('notice');
 
   if (isAdult) {
-    // 年齡通過
-    window.location.href = "index.html";
+    // ✅ 年齡通過：紀錄狀態 + 導回首頁
+    localStorage.setItem('ageVerified', 'true');
+    window.location.href = "./index.html";
   } else {
-    // 未滿18歲
+    // 🚫 未滿18歲：顯示提示、不跳轉
     notice.classList.add('visible');
     setTimeout(() => {
       notice.classList.remove('visible');
-    }, 3000); // 消失ㄉ時間
+    }, 3000);
   }
 }
 </script>
 </body>
 </html>
+
