@@ -1,518 +1,121 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <script>
-  // 驗證年齡用
-  if (!localStorage.getItem('ageVerified')) {
-    window.location.href = "agecheck.html";
-  }
-</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ECLIPSTONE</title>
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ECLIPSTONE</title>
+  <!-- 字體 -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
 
-<!-- 字體 -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --bg: #0b0e11;
-  --accent: #68b0f0;
-  --text: #e6edf5;
-  --muted: #9da8b3;
-  --card: rgba(255,255,255,0.05);
-  font-family: "Chiron GoRound TC", "Noto Sans TC", sans-serif;
-}
-
-html { scroll-behavior: smooth; }
-body {
-  margin:0; background:var(--bg); color:var(--text);
-  line-height:1.6; overflow-x:hidden;
-  font-family: "Chiron GoRound TC", "Noto Sans TC", sans-serif;
-}
-
-section { padding:80px 20px; max-width:1100px; margin:auto; }
-
-/* 最上面ㄉ導覽列 */
-header {
-  position:fixed; top:0; left:0; right:0; z-index:999;
-  background:rgba(10,15,20,0.6); backdrop-filter:blur(12px);
-  display:flex; align-items:center; justify-content:space-between;
-  padding:12px 24px; border-bottom:1px solid rgba(255,255,255,0.06);
-}
-header h1 {
-  font-size:18px; letter-spacing:1px; color:var(--accent); margin:0;
-  font-family:"Orbitron",sans-serif;
-}
-nav {
-  display:flex; align-items:center;
-}
-nav a {
-  color:var(--muted); text-decoration:none; margin-left:20px; font-size:14px;
-}
-nav a:hover { color:var(--accent); }
-
-/* ====== 選單測試 ====== */
-.menu-toggle {
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  width:28px; height:24px;
-  cursor:pointer;
-}
-.menu-toggle span {
-  height:3px;
-  background:var(--accent);
-  margin:4px 0;
-  border-radius:2px;
-  transition:all 0.4s ease;
-}
-.menu-toggle.active span:nth-child(1) {
-  transform:translateY(7px) rotate(45deg);
-}
-.menu-toggle.active span:nth-child(2) {
-  opacity:0;
-}
-.menu-toggle.active span:nth-child(3) {
-  transform:translateY(-7px) rotate(-45deg);
-}
-
-/* ==== 手機選單 ==== */
-.menu-toggle {
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  width:30px; height:26px;
-  cursor:pointer;
-  transition:transform 0.3s ease;
-}
-.menu-toggle:hover { transform:scale(1.1); }
-.menu-toggle span {
-  height:3px; width:100%;
-  background:var(--accent);
-  margin:4px 0;
-  border-radius:2px;
-  box-shadow:0 0 6px rgba(104,176,240,0.6);
-  transition:all 0.4s ease;
-}
-.menu-toggle.active span:nth-child(1) {
-  transform:translateY(7px) rotate(45deg);
-}
-.menu-toggle.active span:nth-child(2) { opacity:0; }
-.menu-toggle.active span:nth-child(3) {
-  transform:translateY(-7px) rotate(-45deg);
-}
-
-/* 手機選單(展開ㄉ) */
-nav.mobile-active {
-  position:absolute;
-  top:65px; right:18px;
-  background:rgba(15,20,25,0.95);
-  flex-direction:column;
-  border-radius:14px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.45);
-  padding:18px 24px;
-  animation: dropdown 0.35s ease forwards;
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.08);
-}
-@keyframes dropdown {
-  from { opacity:0; transform:translateY(-12px); }
-  to { opacity:1; transform:translateY(0); }
-}
-nav.mobile-active a {
-  margin:10px 0; color:var(--text);
-  text-align:center; font-size:15px;
-  letter-spacing:1px;
-  transition:color 0.2s ease;
-}
-nav.mobile-active a:hover { color:var(--accent); }
-
-/* 小螢幕ㄉ */
-@media (max-width: 768px) {
-  nav:not(.mobile-active) { display:none; }  /* ← 加上 :not() */
-  .menu-toggle { display:flex; }
-  nav.mobile-active { display:flex; }
-}
-
-/* ====== 首頁 ====== */
-.hero {
-  position:relative;
-  background:url('images/scene01.jpg') center/cover no-repeat;
-  height:100vh; display:flex; flex-direction:column; justify-content:center;
-  align-items:center; text-align:center; padding:0 20px;
-  overflow:hidden;
-}
-.hero::before {
-  content:""; position:absolute; inset:0;
-  background:rgba(10,15,20,0.55); backdrop-filter:blur(3px);
-}
-.hero h2 {
-  position:relative; z-index:2;
-  font-size:42px; letter-spacing:3px; margin:0 0 20px;
-  font-family:"Orbitron", sans-serif;
-  color:var(--accent);
-  text-shadow:0 0 15px rgba(104,176,240,0.6);
-  animation: glow 3s ease-in-out infinite alternate;
-}
-.hero p {
-  position:relative; z-index:2;
-  max-width:700px; color:#dce3ec; font-size:16px;
-  background:rgba(255,255,255,0.08);
-  padding:20px; border-radius:12px; backdrop-filter:blur(4px);
-  border:1px solid rgba(255,255,255,0.1);
-}
-
-#world p { text-align: center; }
-
-@keyframes glow {
-  from { text-shadow:0 0 10px rgba(104,176,240,0.5); }
-  to { text-shadow:0 0 20px rgba(104,176,240,0.9); }
-}
-
-/* ====== 淡入效果 ====== */
-.fade-in {
-  opacity:0; transform:translateY(40px);
-  transition:opacity 0.8s ease, transform 0.8s ease;
-}
-.fade-in.visible {
-  opacity:1; transform:translateY(0);
-}
-
-/* 圖片標題網址區 */
-.section-title {
-  font-size:0;
-  display:block;
-  margin:0 auto 24px;
-  width:230px;
-  height:60px;
-  background-size:contain;
-  background-repeat:no-repeat;
-  background-position:center;
-  border:none;
-}
-.title-world { background-image:url('images/SJG.png'); }
-.title-energy { background-image:url('images/NUS1.png'); }
-.title-chars { background-image:url('images/character1.png'); }
-
-/* 角色區 */
-.char-grid {
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;
-}
-.char-card {
-  background:var(--card); padding:16px; border-radius:12px;
-  border:1px solid rgba(255,255,255,0.05); text-align:center;
-  transition:transform .3s ease, box-shadow .3s ease;
-}
-.char-card:hover { transform:translateY(-5px); box-shadow:0 6px 20px rgba(0,0,0,0.5); }
-.char-card img {
-  width:100%; border-radius:10px; height:360px; object-fit:cover; object-position:center;
-}
-.char-name { font-size:20px; margin-top:10px; color:var(--text); font-family:"Orbitron", sans-serif; }
-.char-sub { font-size:14px; color:var(--muted); margin-bottom:6px; }
-.char-info { font-size:13px; color:var(--muted); margin-bottom:8px; line-height:1.4; }
-.tags { display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin:8px 0; }
-.tag {
-  background:rgba(255,255,255,0.1); color:var(--muted);
-  padding:4px 8px; border-radius:6px; font-size:12px;
-}
-
-/* 俗頭介紹區 */
-.energy-section {
-  position:relative;
-  background:url('https://i.imghippo.com/files/gyXP7820lks.png') center/cover no-repeat;
-  color:#e9edf3;
-  text-align:center;
-  min-height:700px;
-  display:flex; justify-content:center; align-items:center;
-  overflow:hidden;
-}
-.energy-section::before {
-  content:""; position:absolute; inset:0;
-  background:rgba(10,15,20,0.45); backdrop-filter:blur(3px);
-}
-.energy-section .content {
-  position:relative; z-index:2;
-  max-width:800px; margin:auto;
-  background:rgba(255,255,255,0.08);
-  padding:40px 20px; border-radius:14px;
-  border:1px solid rgba(255,255,255,0.12);
-  backdrop-filter:blur(8px);
-  box-shadow:0 0 25px rgba(104,176,240,0.25);
-  animation: energy-glow 5s ease-in-out infinite alternate;
-}
-@keyframes energy-glow {
-  0% { box-shadow:0 0 20px rgba(104,176,240,0.25); }
-  100% { box-shadow:0 0 45px rgba(104,176,240,0.55); }
-}
-
-/* 75宣傳用 */
-.promo-section {
-  background:linear-gradient(135deg, rgba(30,40,50,0.8), rgba(10,15,20,0.9));
-  border-top:1px solid rgba(255,255,255,0.08);
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  padding:80px 20px;
-}
-.promo-card {
-  max-width:900px; margin:auto;
-  background:rgba(255,255,255,0.06);
-  border-radius:16px; padding:40px;
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.1);
-  display:flex; flex-direction:column; align-items:center; text-align:center;
-}
-.promo-card h3 {
-  font-size:26px; color:var(--accent);
-  font-family:"Orbitron",sans-serif;
-  margin-bottom:20px;
-}
-.promo-card p {
-  color:var(--muted); max-width:700px; margin-bottom:24px;
-}
-.promo-card a {
-  display:inline-block; padding:12px 24px;
-  background:var(--accent); color:#fff; text-decoration:none;
-  border-radius:8px; transition:background .3s ease;
-}
-.promo-card a:hover { background:#4c96d1; }
-
-footer {
-  text-align:center; color:var(--muted); font-size:13px;
-  padding:40px 0 20px; border-top:1px solid rgba(255,255,255,0.05);
-}
-
-.news-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  max-width: 700px;
-  margin-top: 10px;
-  text-align: left;
-}
-
-.news-item {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  padding: 14px 18px;
-  backdrop-filter: blur(6px);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.news-item:hover {
-  background: rgba(104,176,240,0.08);
-  box-shadow: 0 0 12px rgba(104,176,240,0.2);
-}
-
-.news-item .date {
-  display: inline-block;
-  color: var(--accent);
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
-}
-
-.news-item p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* 手機優化 */
-@media (max-width: 768px) {
-  .news-list {
-    gap: 10px;
-  }
-  .news-item {
-    padding: 12px 14px;
-  }
-}
-
-/* 回到上層按鈕 */
-#back-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  display: none;
-  background-color: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: background 0.3s;
-  z-index: 999;
-}
-#back-to-top:hover { background-color: #4c96d1; }
-
-/* 角色卡測試 */
-.preview-card {
-  margin-top: 40px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 30px;
-  backdrop-filter: blur(8px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.preview-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-
-/* 圓形 */
-.preview-image {
-  position: relative;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 0 25px rgba(104,176,240,0.35);
-}
-
-.preview-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.88);
-}
-
-/* 右側按鈕區 */
-.preview-info {
-  margin-left: 40px;
-}
-
-.preview-info button {
-  position: relative;
-  border: 1px solid rgba(104,176,240,0.5);
-  background: rgba(104,176,240,0.1);
-  color: #e6edf5;
-  border-radius: 12px;
-  padding: 14px 30px;
-  cursor: pointer;
-  font-size: 15px;
-  letter-spacing: 1px;
-  font-family: "Orbitron", sans-serif;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 15px rgba(104,176,240,0.25);
-}
-
-.preview-info button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg,
-              transparent 0%,
-              rgba(104,176,240,0.3) 45%,
-              rgba(104,176,240,0.7) 50%,
-              rgba(104,176,240,0.3) 55%,
-              transparent 100%);
-  transition: all 0.5s ease;
-}
-
-.preview-info button:hover::before {
-  left: 100%;
-  transition: all 1s ease;
-}
-
-.preview-info button:hover {
-  color: #fff;
-  box-shadow: 0 0 25px rgba(104,176,240,0.6);
-  background: rgba(104,176,240,0.15);
-  border-color: rgba(104,176,240,0.7);
-}
-
-/* 手機版測試 */
-@media (max-width: 768px) {
-  .preview-card {
-    flex-direction: column;
-    padding: 24px;
-  }
-  .preview-image {
-    margin-bottom: 20px;
-    width: 200px;
-    height: 200px;
-  }
-  .preview-info {
-    margin-left: 0;
-  }
-}
-</style>
+  <!-- 外部樣式 -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<header>
-  <h1>ECLIPSTONE</h1>
+  <script>
+    // 驗證年齡
+    if (!localStorage.getItem('ageVerified')) {
+      window.location.href = "agecheck.html";
+    }
+  </script>
 
-  <!-- 手機ㄉ選單用  -->
-  <div class="menu-toggle" id="menu-toggle">
-    <span></span><span></span><span></span>
-  </div>
+  <header>
+    <h1>ECLIPSTONE</h1>
+    <div class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></div>
+    <nav id="nav">
+      <a href="#world">世界觀</a>
+      <a href="#energy">能源石</a>
+	  <a href="#powers">異能者｜賭石師</a>
+      <a href="#map-section">地圖</a>
+      <a href="#chars">角色</a>
+      <a href="#news">最新消息</a>
+      <a href="events.html">事件欄</a>
+    </nav>
+  </header>
 
-  <nav id="nav">
-    <a href="#world">世界觀</a>
-    <a href="#energy">能源石</a>
-    <a href="#chars">角色</a>
-    <a href="#contact">聯絡區</a>
-  </nav>
-</header>
+  <section class="hero" id="home">
+    <h2 class="hero-title">ECLIPSTONE</h2>
+    <div class="hero-inner">
+      <div class="hero-image"><img src="images/preview.jpg" alt="角色預覽"></div>
+      <div class="hero-content">
+        <p>名為「能量風暴」的災變席捲全球。<br>
+        異能者從絕望中誕生，倖存者築起防線。<br>
+        能源石閃耀著人類延續的希望。<br>
+        ——秩序，正從灰燼中重生。</p>
+        <div class="hero-buttons">
+          <button onclick="location.href='https://abr.ge/nca5yw'">成為倖存者</button>
+          <button onclick="location.href='events.html'">前往事件欄</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- 簡介用 -->
-<section class="hero" id="home">
-  <h2>ECLIPSTONE</h2>
-  <p>三年前，名為「能量風暴」的災變席捲全球。<br>
-  異能者從絕望中誕生，倖存者築起最後防線。<br>
-  能源石閃耀著人類延續的希望。<br>
-  ——秩序，正從灰燼中重生。</p>
+  <section id="world" class="fade-in">
+    <h3 class="section-title title-world">世界觀</h3>
+    <p>三年前，自地核竄出的能量風暴引發了全球性災變。<br>
+    天空被撕裂，磁場錯亂；大地被未知能量重構。<br>
+    異變體與異獸肆虐，異能者則成為人類最後的堡壘。<br><br>
+    ——在這個由「能源石」支撐的新秩序裡，力量是唯一的法則。</p>
+  </section>
 
-  <!-- 角色卡 -->
-<div class="preview-card">
-  <div class="preview-image">
-    <img src="images/preview.jpg" alt="角色預覽">
-  </div>
-  <div class="preview-info">
-    <button onclick="location.href='https://abr.ge/nca5yw'">成為倖存者</button>
-  </div>
-</div>
-</section>
+  <section id="energy" class="energy-section fade-in">
+    <div class="content">
+      <h3 class="section-title title-energy">能源石</h3>
+      <p>能源石。<br>
+      災變後地球能量場劇變所誕生的晶體。<br>
+      它蘊藏著未知力量，可賦予、修復、甚至改變異能者的命運。<br>
+      它是末世中最珍貴的希望，也是最危險的誘惑。</p>
+    </div>
+  </section>
 
-<section id="world" class="fade-in">
-  <h3 class="section-title title-world">世界觀</h3>
-  <p>三年前，自地核竄出的能量風暴引發了全球性災變。<br>
-  天空被撕裂，磁場錯亂；大地被未知能量重構。<br>
-  異變體與異獸肆虐，異能者則成為人類最後的堡壘。<br><br>
-  ——在這個由「能源石」支撐的新秩序裡，力量是唯一的法則。</p>
-</section>
+  <section id="powers" class="fade-in">
+    <h3 class="section-title" style="background-image:url('images/標題用2.png'); width:260px; height:60px;"></h3>
+    <div class="power-grid">
+      <div class="power-card" onclick="toggleInfo('ability')">
+        <img src="images/ability.png" alt="異能者">
+        <div class="power-name blue">異能者</div>
+      </div>
+      <div class="power-card" onclick="toggleInfo('gambler')">
+        <img src="images/gambler.png" alt="賭石師">
+        <div class="power-name gold">賭石師</div>
+      </div>
+    </div>
 
-<section id="energy" class="energy-section fade-in">
-  <div class="content">
-    <h3 class="section-title title-energy">能源石</h3>
-    <p>能源石。<br>
-	災變後地球能量場劇變所誕生的晶體。<br>
-    它蘊藏著未知力量，可賦予、修復、甚至改變異能者的命運。<br>
-    它是末世中最珍貴的希望，也是最危險的誘惑。</p>
-  </div>
-</section>
+    <div class="power-info" id="ability-info">
+      <div class="info-content">
+        <h4>異能者</h4>
+        <p>他們是能量風暴之後的產物，身體被未知能量改造。  
+        每個異能者的能力都源於能源石的共鳴，有人掌火、有人控時。  
+        他們既是希望，也是災難的象徵。</p>
+        <button onclick="toggleInfo('ability')">關閉</button>
+      </div>
+    </div>
 
+    <div class="power-info" id="gambler-info">
+      <div class="info-content">
+        <h4>賭石師</h4>
+        <p>賭石師是與能源石共生的職業。  
+        他們能以靈識分辨晶體品質，並從石中覺醒未知力量。  
+        在末世的黑市裡，一顆能源石可換一條命。</p>
+        <button onclick="toggleInfo('gambler')">關閉</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="map-section" class="fade-in">
+    <h3 class="section-title" style="background-image:url('images/標題用.png'); width:260px; height:60px;"></h3>
+    <div class="map-container">
+      <button type="button" class="map-toggle" onclick="toggleMap()">查看區域地圖</button>
+      <div class="map-wrapper" id="mapWrapper">
+        <img src="images/map.png" alt="區域地圖">
+      </div>
+    </div>
+  </section>
+<!-- 角色區 -->
 <section id="chars" class="fade-in">
   <h3 class="section-title title-chars"></h3>
   <div class="char-grid">
@@ -556,64 +159,19 @@ footer {
     </div>
   </div>
 </section>
-
-<!-- 最新消息更新區 -->
-<section id="news" class="promo-section fade-in">
-  <div class="promo-card">
-    <h3>最新消息</h3>
-    <div class="news-list">
-      <div class="news-item">
-        <span class="date">2025.10.24</span>
-        <p>ECLIPSTONE網站正式上線。</p>
-      </div>
-      <div class="news-item">
-        <span class="date">2025.10.20</span>
-        <p>角色資料建立完成，新增視覺預覽介面。</p>
-      </div>
-      <div class="news-item">
-        <span class="date">2025.10.05</span>
-        <p>世界觀架構完畢。</p>
+  <section id="news" class="promo-section fade-in">
+    <div class="promo-card">
+      <h3>最新消息</h3>
+      <div class="news-list">
+        <div class="news-item"><span class="date">2025.10.24</span><p>ECLIPSTONE網站正式上線。</p></div>
+        <div class="news-item"><span class="date">2025.10.20</span><p>角色資料建立完成，新增視覺預覽介面。</p></div>
+        <div class="news-item"><span class="date">2025.10.05</span><p>世界觀架構完畢。</p></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>© 2025 by Chen Yu. Powered and secured by Lovey-Dovey:ECLIPSTONE</footer>
-
-<button id="back-to-top" title="回到上層">▲</button>
-
-<script>
-// 淡入效果
-const faders = document.querySelectorAll('.fade-in');
-const appearOptions = { threshold: 0.2 };
-const appearOnScroll = new IntersectionObserver((entries, obs) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      obs.unobserve(e.target);
-    }
-  });
-}, appearOptions);
-faders.forEach(f => appearOnScroll.observe(f));
-
-// 回到上層按鈕
-const backToTop = document.getElementById('back-to-top');
-window.addEventListener('scroll', () => {
-  backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-});
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// 選單互動用
-const menuToggle = document.getElementById('menu-toggle');
-const nav = document.getElementById('nav');
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  nav.classList.toggle('mobile-active');
-});
-</script>
+  <footer>© 2025 by Chen Yu. Powered and secured by Lovey-Dovey:ECLIPSTONE</footer>
+  <button id="back-to-top" title="回到上層">▲</button>
+  <script src="script.js"></script>
 </body>
 </html>
-
-

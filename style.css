@@ -1,0 +1,898 @@
+:root {
+  --bg: #0b0e11;
+  --accent: #68b0f0;
+  --text: #e6edf5;
+  --muted: #9da8b3;
+  --card: rgba(255,255,255,0.05);
+  font-family: "Chiron GoRound TC", "Noto Sans TC", sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  margin:0; background:var(--bg); color:var(--text);
+  line-height:1.6; overflow-x:hidden;
+  font-family: "Chiron GoRound TC", "Noto Sans TC", sans-serif;
+}
+
+section { padding:60px 20px; max-width:1100px; margin:auto; }
+
+/* 最上面ㄉ導覽列 */
+header {
+  position:fixed; top:0; left:0; right:0; z-index:999;
+  background:rgba(10,15,20,0.6); backdrop-filter:blur(12px);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 24px; border-bottom:1px solid rgba(255,255,255,0.06);
+}
+header h1 {
+  font-size:18px; letter-spacing:1px; color:var(--accent); margin:0;
+  font-family:"Orbitron",sans-serif;
+}
+nav {
+  display:flex; align-items:center;
+}
+nav a {
+  color:var(--muted); text-decoration:none; margin-left:20px; font-size:14px;
+}
+nav a:hover { color:var(--accent); }
+
+/* ====== 選單測試 ====== */
+.menu-toggle {
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  width:28px; height:24px;
+  cursor:pointer;
+}
+.menu-toggle span {
+  height:3px;
+  background:var(--accent);
+  margin:4px 0;
+  border-radius:2px;
+  transition:all 0.4s ease;
+}
+.menu-toggle.active span:nth-child(1) {
+  transform:translateY(7px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+  opacity:0;
+}
+.menu-toggle.active span:nth-child(3) {
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+/* ==== 手機選單 ==== */
+.menu-toggle {
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  width:30px; height:26px;
+  cursor:pointer;
+  transition:transform 0.3s ease;
+}
+.menu-toggle:hover { transform:scale(1.1); }
+.menu-toggle span {
+  height:3px; width:100%;
+  background:var(--accent);
+  margin:4px 0;
+  border-radius:2px;
+  box-shadow:0 0 6px rgba(104,176,240,0.6);
+  transition:all 0.4s ease;
+}
+.menu-toggle.active span:nth-child(1) {
+  transform:translateY(7px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) { opacity:0; }
+.menu-toggle.active span:nth-child(3) {
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+/* 手機選單(展開ㄉ) */
+nav.mobile-active {
+  position:absolute;
+  top:65px; right:18px;
+  background:rgba(15,20,25,0.95);
+  flex-direction:column;
+  border-radius:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.45);
+  padding:18px 24px;
+  animation: dropdown 0.35s ease forwards;
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.08);
+}
+@keyframes dropdown {
+  from { opacity:0; transform:translateY(-12px); }
+  to { opacity:1; transform:translateY(0); }
+}
+nav.mobile-active a {
+  margin:10px 0; color:var(--text);
+  text-align:center; font-size:15px;
+  letter-spacing:1px;
+  transition:color 0.2s ease;
+}
+nav.mobile-active a:hover { color:var(--accent); }
+
+/* 小螢幕ㄉ */
+@media (max-width: 768px) {
+  nav:not(.mobile-active) { display:none; }  /* ← 加上 :not() */
+  .menu-toggle { display:flex; }
+  nav.mobile-active { display:flex; }
+}
+
+/* ====== 首頁 ====== */
+/* ====== 首頁修正版 ====== */
+.hero {
+  position: relative;
+  background: url('images/scene01.jpg') center/cover no-repeat;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10,15,20,0.55);
+  backdrop-filter: blur(3px);
+}
+
+/* 上方標題 */
+.hero-title {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  font-size: 48px;
+  font-family: "Orbitron", sans-serif;
+  color: var(--accent);
+  text-shadow: 0 0 15px rgba(104,176,240,0.7);
+  margin-bottom: 30px;
+}
+
+/* 內層卡片 */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 25px rgba(104,176,240,0.25);
+  margin-top: 10px;
+}
+
+/* 圖片維持完美圓形 */
+.hero-image {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(104,176,240,0.4);
+  flex: none;               /* ✅ 禁止被 flex 壓縮 */
+  margin-right: 40px;
+}
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* 文字與按鈕區 */
+.hero-content {
+  flex: 1;
+  text-align: center;
+}
+.hero-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #dce3ec;
+  background: rgba(255,255,255,0.08);
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 20px;
+}
+
+/* 按鈕水平排列 */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-buttons button {
+  min-width: 140px; /* ✅ 防止太窄變形 */
+}
+
+/* 恢復按鈕玻璃發光感 */
+.hero-buttons button {
+  position: relative;
+  border: 1px solid rgba(104,176,240,0.5);
+  background: rgba(104,176,240,0.1);
+  color: #e6edf5;
+  border-radius: 12px;
+  padding: 14px 30px;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-family: "Orbitron", sans-serif;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(104,176,240,0.25);
+}
+
+/* 滑動閃光效果 */
+.hero-buttons button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg,
+              transparent 0%,
+              rgba(104,176,240,0.3) 45%,
+              rgba(104,176,240,0.7) 50%,
+              rgba(104,176,240,0.3) 55%,
+              transparent 100%);
+  transition: all 0.5s ease;
+}
+
+.hero-buttons button:hover::before {
+  left: 100%;
+  transition: all 1s ease;
+}
+
+/* 滑鼠懸停特效 */
+.hero-buttons button:hover {
+  color: #fff;
+  box-shadow: 0 0 25px rgba(104,176,240,0.6);
+  background: rgba(104,176,240,0.15);
+  border-color: rgba(104,176,240,0.7);
+}
+
+
+/* 📱 RWD 手機版 */
+@media (max-width: 768px) {
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+  }
+  .hero-image {
+    width: 200px;
+    height: 200px;
+    flex: none;
+    margin: 0 0 20px 0;
+  }
+  .hero-content p {
+    font-size: 13px;
+  }
+  .hero-buttons {
+    flex-direction: row; /* ✅ 保持水平 */
+    gap: 12px;
+  }
+}
+
+
+.hero h2 {
+  position:relative; z-index:2;
+  font-size:42px; letter-spacing:3px; margin:0 0 20px;
+  font-family:"Orbitron", sans-serif;
+  color:var(--accent);
+  text-shadow:0 0 15px rgba(104,176,240,0.6);
+  animation: glow 3s ease-in-out infinite alternate;
+}
+.hero p {
+  position:relative; z-index:2;
+  max-width:700px; color:#dce3ec; font-size:16px;
+  background:rgba(255,255,255,0.08);
+  padding:20px; border-radius:12px; backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,0.1);
+}
+
+#world p { text-align: center; }
+
+@keyframes glow {
+  from { text-shadow:0 0 10px rgba(104,176,240,0.5); }
+  to { text-shadow:0 0 20px rgba(104,176,240,0.9); }
+}
+
+/* ====== 淡入效果 ====== */
+.fade-in {
+  opacity:0; transform:translateY(40px);
+  transition:opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity:1; transform:translateY(0);
+}
+
+/* 圖片標題網址區 */
+.section-title {
+  font-size:0;
+  display:block;
+  margin:0 auto 24px;
+  width:230px;
+  height:60px;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  border:none;
+}
+.title-world { background-image:url('images/SJG.png'); }
+.title-energy { background-image:url('images/NUS1.png'); }
+.title-chars { background-image:url('images/character1.png'); }
+
+/* 角色區 */
+.char-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;
+}
+.char-card {
+  background:var(--card); padding:16px; border-radius:12px;
+  border:1px solid rgba(255,255,255,0.05); text-align:center;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.char-card:hover { transform:translateY(-5px); box-shadow:0 6px 20px rgba(0,0,0,0.5); }
+.char-card img {
+  width:100%; border-radius:10px; height:360px; object-fit:cover; object-position:center;
+}
+.char-name { font-size:20px; margin-top:10px; color:var(--text); font-family:"Orbitron", sans-serif; }
+.char-sub { font-size:14px; color:var(--muted); margin-bottom:6px; }
+.char-info { font-size:13px; color:var(--muted); margin-bottom:8px; line-height:1.4; }
+.tags { display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin:8px 0; }
+.tag {
+  background:rgba(255,255,255,0.1); color:var(--muted);
+  padding:4px 8px; border-radius:6px; font-size:12px;
+}
+
+/* 俗頭介紹區 */
+.energy-section {
+  position:relative;
+  background:url('https://i.imghippo.com/files/gyXP7820lks.png') center/cover no-repeat;
+  color:#e9edf3;
+  text-align:center;
+  min-height:700px;
+  display:flex; justify-content:center; align-items:center;
+  overflow:hidden;
+}
+.energy-section::before {
+  content:""; position:absolute; inset:0;
+  background:rgba(10,15,20,0.45); backdrop-filter:blur(3px);
+}
+.energy-section .content {
+  position:relative; z-index:2;
+  max-width:800px; margin:auto;
+  background:rgba(255,255,255,0.08);
+  padding:40px 20px; border-radius:14px;
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 25px rgba(104,176,240,0.25);
+  animation: energy-glow 5s ease-in-out infinite alternate;
+}
+@keyframes energy-glow {
+  0% { box-shadow:0 0 20px rgba(104,176,240,0.25); }
+  100% { box-shadow:0 0 45px rgba(104,176,240,0.55); }
+}
+
+/* ===== 異能者與賭石師區 ===== */
+.power-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.power-card {
+  position: relative;
+  width: 320px;
+  height: 420px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 25px rgba(104,176,240,0.25);
+  position: relative;
+}
+.power-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 40px rgba(104,176,240,0.4);
+}
+.power-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+.power-card:hover img { opacity: 1; }
+
+/* === 藝能者和賭石師 === */
+.power-name {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 2px;
+  font-size: 20px; /* 小一號 */
+  color: rgba(255,255,255,0.8); /* 80%白 */
+  padding: 12px 0;
+  z-index: 2;
+
+  /* 背景橫條玻璃效果 */
+  background: rgba(10,15,20,0.45);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  text-shadow: 0 0 6px rgba(255,255,255,0.25);
+}
+.power-name:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+/* 滑過微亮 */
+.power-name:hover {
+  filter: brightness(1.4) drop-shadow(0 0 8px rgba(255,255,255,0.3));
+}
+
+
+/* 滑出玻璃卡 */
+.power-info {
+  position: fixed;
+  top: 50%;
+  left: -120%;
+  width: 80%;
+  max-width: 800px;
+  height: auto;
+  background: linear-gradient(120deg,
+              rgba(10,15,20,0.85) 0%,
+              rgba(15,20,25,0.8) 40%,
+              rgba(20,30,40,0.8) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  transition: left 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
+  transform: translateY(-50%);
+  opacity: 0;
+  z-index: 999;
+}
+.power-info.active {
+  left: 50%;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+.info-content {
+  padding: 40px;
+  text-align: center;
+  color: var(--text);
+}
+
+.info-content h4 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--accent);
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+.info-content p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #dce3ec;
+  margin-bottom: 28px;
+}
+.info-content button {
+  border: 1px solid rgba(104,176,240,0.5);
+  background: rgba(104,176,240,0.1);
+  color: #e6edf5;
+  border-radius: 10px;
+  padding: 10px 28px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-family: "Orbitron", sans-serif;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(104,176,240,0.25);
+}
+.info-content button:hover {
+  color: #fff;
+  box-shadow: 0 0 25px rgba(104,176,240,0.6);
+  background: rgba(104,176,240,0.15);
+  border-color: rgba(104,176,240,0.7);
+}
+
+/* RWD 手機優化 */
+@media (max-width: 768px) {
+  .power-grid {
+    gap: 30px;
+  }
+
+  .power-card {
+    width: 85%;
+    height: 360px;
+  }
+
+  .info-content {
+    margin: 40px auto;
+    padding: 16px;
+  }
+
+  /* ✅ 手機版玻璃卡寬度調整 */
+  .power-info {
+    width: 90%;
+    max-width: 500px;
+    left: -110%; /* ← 從畫面左側滑入 */
+  }
+
+  .power-info.active {
+    left: 50%; /* ← 停在中間 */
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+/* 最新消息用 */
+.promo-section {
+  background:linear-gradient(135deg, rgba(30,40,50,0.8), rgba(10,15,20,0.9));
+  border-top:1px solid rgba(255,255,255,0.08);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:80px 20px;
+}
+.promo-card {
+  max-width:900px; margin:auto;
+  background:rgba(255,255,255,0.06);
+  border-radius:16px; padding:40px;
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+}
+.promo-card h3 {
+  font-size:26px; color:var(--accent);
+  font-family:"Orbitron",sans-serif;
+  margin-bottom:20px;
+}
+.promo-card p {
+  color:var(--muted); max-width:700px; margin-bottom:24px;
+}
+.promo-card a {
+  display:inline-block; padding:12px 24px;
+  background:var(--accent); color:#fff; text-decoration:none;
+  border-radius:8px; transition:background .3s ease;
+}
+.promo-card a:hover { background:#4c96d1; }
+
+footer {
+  text-align:center; color:var(--muted); font-size:13px;
+  padding:40px 0 20px; border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 700px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.news-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 14px 18px;
+  backdrop-filter: blur(6px);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item:hover {
+  background: rgba(104,176,240,0.08);
+  box-shadow: 0 0 12px rgba(104,176,240,0.2);
+}
+
+.news-item .date {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.news-item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 手機優化 */
+@media (max-width: 768px) {
+  .news-list {
+    gap: 10px;
+  }
+  .news-item {
+    padding: 12px 14px;
+  }
+}
+
+/* 回到上層按鈕 */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+  z-index: 999;
+}
+#back-to-top:hover { background-color: #4c96d1; }
+
+/* === 地圖區 === */
+.map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.map-toggle {
+  width: 80%;
+  max-width: 600px;
+  padding: 14px 0;
+  font-size: 16px;
+  color: #e6edf5;
+  background: rgba(104,176,240,0.1);
+  border: 1px solid rgba(104,176,240,0.5);
+  border-radius: 12px;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 2px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.4s ease;
+  box-shadow: 0 0 20px rgba(104,176,240,0.25);
+}
+
+.map-toggle:hover {
+  background: rgba(104,176,240,0.15);
+  box-shadow: 0 0 25px rgba(104,176,240,0.4);
+}
+
+/* 地圖展開區 */
+.map-wrapper {
+  max-width: 1000px;
+  width: 90%;
+  margin-top: 30px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 25px rgba(104,176,240,0.25);
+  opacity: 0;
+  max-height: 0;
+  transition: max-height 0.9s ease, opacity 0.6s ease;
+}
+
+/* 展開後狀態 */
+.map-wrapper.active {
+  opacity: 1;
+  max-height: 1200px; /* 可依地圖長寬微調 */
+}
+
+.map-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+/* 手機版縮放調整 */
+@media (max-width: 768px) {
+  .map-toggle {
+    width: 90%;
+    font-size: 14px;
+  }
+
+  .map-wrapper {
+    width: 95%;
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+    transition:
+      max-height 0.7s cubic-bezier(0.77, 0, 0.175, 1),
+      opacity 0.5s ease,
+      padding 0.3s ease;
+  }
+
+  .map-wrapper.active {
+    opacity: 1;
+    max-height: 800px;
+    padding: 6px;
+  }
+
+  /* 修正間距：縮短上下空白 */
+  #map-section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .map-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  #chars {
+    padding-top: 20px;
+  }
+}
+
+
+/* 角色卡測試 */
+.preview-card {
+  margin-top: 40px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* 圓形 */
+.preview-image {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(104,176,240,0.35);
+}
+
+.preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.88);
+}
+
+/* 右側按鈕區 */
+.preview-info {
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 按鈕置中 */
+}
+
+.preview-info button {
+  position: relative;
+  border: 1px solid rgba(104,176,240,0.5);
+  background: rgba(104,176,240,0.1);
+  color: #e6edf5;
+  border-radius: 12px;
+  padding: 14px 30px;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-family: "Orbitron", sans-serif;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(104,176,240,0.25);
+  margin: 5px;
+}
+
+.preview-info button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg,
+              transparent 0%,
+              rgba(104,176,240,0.3) 45%,
+              rgba(104,176,240,0.7) 50%,
+              rgba(104,176,240,0.3) 55%,
+              transparent 100%);
+  transition: all 0.5s ease;
+}
+
+.preview-info button:hover::before {
+  left: 100%;
+  transition: all 1s ease;
+}
+
+.preview-info button:hover {
+  color: #fff;
+  box-shadow: 0 0 25px rgba(104,176,240,0.6);
+  background: rgba(104,176,240,0.15);
+  border-color: rgba(104,176,240,0.7);
+}
+
+/* 手機版測試 */
+@media (max-width: 768px) {
+  .preview-card {
+    flex-direction: column;
+    padding: 24px;
+  }
+  .preview-image {
+    margin-bottom: 20px;
+    width: 200px;
+    height: 200px;
+  }
+  .preview-info {
+    margin-left: 0;
+  }
+}
+.promo-section {
+  position: relative;
+  z-index: 1;
+}
+.promo-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(104,176,240,0.08), rgba(10,15,20,0));
+  filter: blur(40px);
+  z-index: 0;
+}
+
+/* === 最新消息卡片光感升級 === */
+.news-item {
+  position: relative;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(104,176,240,0.1);
+  border-radius: 12px;
+  padding: 14px 18px;
+  backdrop-filter: blur(8px);
+  transition: all 0.35s ease;
+  box-shadow: inset 0 0 8px rgba(255,255,255,0.04), 0 4px 20px rgba(0,0,0,0.3);
+}
+.news-item:hover {
+  background: rgba(104,176,240,0.06);
+  box-shadow: inset 0 0 10px rgba(104,176,240,0.12), 0 8px 28px rgba(104,176,240,0.25);
+  transform: translateY(-3px);
+}
+
+/* === 標題發光效果 === */
+.promo-card h3 {
+  text-shadow: 0 0 10px rgba(104,176,240,0.4);
+}
+.news-item .date {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
