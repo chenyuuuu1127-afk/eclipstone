@@ -70,8 +70,4 @@ document.addEventListener('selectstart', event => event.preventDefault());
 document.addEventListener('copy', event => event.preventDefault());
 document.addEventListener('dragstart', event => event.preventDefault());
 document.addEventListener('touchstart', event => {
-/*
-document.addEventListener('touchstart', event => {
-  if (event.touches.length > 1) event.preventDefault(); // 防止雙指縮放
-}, { passive: false });
-*/
+}, { passive: true });
