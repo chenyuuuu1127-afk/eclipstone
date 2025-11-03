@@ -28,7 +28,7 @@ menuToggle.addEventListener('click', () => {
   nav.classList.toggle('mobile-active');
 });
 
-// 異能者與賭石師資訊滑出
+// 異能者與賭俗資訊滑出
 function toggleInfo(type) {
   const info = document.getElementById(`${type}-info`);
   info.classList.toggle('active');
@@ -64,3 +64,14 @@ function toggleMap() {
     }, 300);
   }
 }
+
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('selectstart', event => event.preventDefault());
+document.addEventListener('copy', event => event.preventDefault());
+document.addEventListener('dragstart', event => event.preventDefault());
+document.addEventListener('touchstart', event => {
+/*
+document.addEventListener('touchstart', event => {
+  if (event.touches.length > 1) event.preventDefault(); // 防止雙指縮放
+}, { passive: false });
+*/
