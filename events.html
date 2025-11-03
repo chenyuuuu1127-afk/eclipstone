@@ -262,6 +262,51 @@ header h1 a:hover {
   text-shadow: 0 0 10px rgba(104,176,240,0.6);
 }
 
+/* ===== 提示 ===== */
+.pulse-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: radial-gradient(circle at center, rgba(104,176,240,0.35), rgba(10,15,20,0.85));
+  color: #e6edf5;
+  padding: 18px 40px;
+  border: 1px solid rgba(104,176,240,0.4);
+  border-radius: 16px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-align: center;
+  opacity: 0;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 25px rgba(104,176,240,0.4);
+  transition: all 0.5s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+.pulse-toast::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at center, rgba(104,176,240,0.35), transparent 70%);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.6s ease;
+}
+.pulse-toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  box-shadow: 0 0 40px rgba(104,176,240,0.55);
+}
+.pulse-toast.show::before {
+  opacity: 0.8;
+  transform: scale(1.8);
+}
+.pulse-toast span {
+  position: relative;
+  z-index: 1;
+}
 
 </style>
 </head>
@@ -413,12 +458,12 @@ function toggleEvent(card) {
 function copyEvent(e, id) {
   e.stopPropagation(); // 避免點擊按鈕又收起事件
   const text = document.getElementById(id).innerText;
-  navigator.clipboard.writeText(text).then(()=>{
-    alert("事件內容已複製！");
-  });
+  navigator.clipboard.writeText(text).then(() => {
+  showCenterPulse("內容已複製！");
+});
 }
 
-// 手機選單（漢堡展開收合）
+// 手機選單
 const menuToggle = document.getElementById('menu-toggle');
 const nav = document.getElementById('nav');
 menuToggle.addEventListener('click', () => {
@@ -426,19 +471,31 @@ menuToggle.addEventListener('click', () => {
   nav.classList.toggle('mobile-active');
 });
 
-// 點擊導覽連結時自動關閉選單（UX加強）
 document.querySelectorAll('nav a').forEach(link => {
   link.addEventListener('click', () => {
     menuToggle.classList.remove('active');
     nav.classList.remove('mobile-active');
   });
 });
+
+// 提示用
+function showCenterPulse(message) {
+  const oldPulse = document.querySelector('.pulse-toast');
+  if (oldPulse) oldPulse.remove();
+
+  const pulse = document.createElement('div');
+  pulse.className = 'pulse-toast';
+  pulse.innerHTML = `<span>${message}</span>`;
+  document.body.appendChild(pulse);
+
+  setTimeout(() => pulse.classList.add('show'), 30);
+
+  setTimeout(() => {
+    pulse.classList.remove('show');
+    setTimeout(() => pulse.remove(), 600);
+  }, 2000);
+}
 </script>
 </body>
 
 </html>
-
-
-
-
-
