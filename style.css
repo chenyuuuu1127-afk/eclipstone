@@ -60,7 +60,6 @@ nav a:hover { color:var(--accent); }
   transform:translateY(-7px) rotate(-45deg);
 }
 
-/* ==== 手機選單 ==== */
 .menu-toggle {
   display:none;
   flex-direction:column;
@@ -119,7 +118,6 @@ nav.mobile-active a:hover { color:var(--accent); }
 }
 
 /* ====== 首頁 ====== */
-/* ====== 首頁修正版 ====== */
 .hero {
   position: relative;
   background: url('images/scene01.jpg') center/cover no-repeat;
@@ -140,7 +138,6 @@ nav.mobile-active a:hover { color:var(--accent); }
   backdrop-filter: blur(3px);
 }
 
-/* 上方標題 */
 .hero-title {
   position: relative;
   z-index: 3;
@@ -152,7 +149,6 @@ nav.mobile-active a:hover { color:var(--accent); }
   margin-bottom: 30px;
 }
 
-/* 內層卡片 */
 .hero-inner {
   position: relative;
   z-index: 2;
@@ -170,14 +166,13 @@ nav.mobile-active a:hover { color:var(--accent); }
   margin-top: 10px;
 }
 
-/* 圖片維持完美圓形 */
 .hero-image {
   width: 260px;
   height: 260px;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 0 25px rgba(104,176,240,0.4);
-  flex: none;               /* ✅ 禁止被 flex 壓縮 */
+  flex: none;
   margin-right: 40px;
 }
 .hero-image img {
@@ -211,10 +206,9 @@ nav.mobile-active a:hover { color:var(--accent); }
   flex-wrap: wrap;
 }
 .hero-buttons button {
-  min-width: 140px; /* ✅ 防止太窄變形 */
+  min-width: 140px;
 }
 
-/* 恢復按鈕玻璃發光感 */
 .hero-buttons button {
   position: relative;
   border: 1px solid rgba(104,176,240,0.5);
@@ -232,7 +226,6 @@ nav.mobile-active a:hover { color:var(--accent); }
   box-shadow: 0 0 15px rgba(104,176,240,0.25);
 }
 
-/* 滑動閃光效果 */
 .hero-buttons button::before {
   content: "";
   position: absolute;
@@ -254,7 +247,6 @@ nav.mobile-active a:hover { color:var(--accent); }
   transition: all 1s ease;
 }
 
-/* 滑鼠懸停特效 */
 .hero-buttons button:hover {
   color: #fff;
   box-shadow: 0 0 25px rgba(104,176,240,0.6);
@@ -262,8 +254,6 @@ nav.mobile-active a:hover { color:var(--accent); }
   border-color: rgba(104,176,240,0.7);
 }
 
-
-/* 📱 RWD 手機版 */
 @media (max-width: 768px) {
   .hero-inner {
     flex-direction: column;
@@ -280,7 +270,7 @@ nav.mobile-active a:hover { color:var(--accent); }
     font-size: 13px;
   }
   .hero-buttons {
-    flex-direction: row; /* ✅ 保持水平 */
+    flex-direction: row;
     gap: 12px;
   }
 }
@@ -309,7 +299,6 @@ nav.mobile-active a:hover { color:var(--accent); }
   to { text-shadow:0 0 20px rgba(104,176,240,0.9); }
 }
 
-/* ====== 淡入效果 ====== */
 .fade-in {
   opacity:0; transform:translateY(40px);
   transition:opacity 0.8s ease, transform 0.8s ease;
@@ -318,7 +307,7 @@ nav.mobile-active a:hover { color:var(--accent); }
   opacity:1; transform:translateY(0);
 }
 
-/* 圖片標題網址區 */
+/* 圖片標題ㄉ地址 */
 .section-title {
   font-size:0;
   display:block;
@@ -435,7 +424,6 @@ nav.mobile-active a:hover { color:var(--accent); }
   padding: 12px 0;
   z-index: 2;
 
-  /* 背景橫條玻璃效果 */
   background: rgba(10,15,20,0.45);
   backdrop-filter: blur(6px);
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -445,14 +433,10 @@ nav.mobile-active a:hover { color:var(--accent); }
   color: #fff;
   text-shadow: 0 0 10px rgba(255,255,255,0.6);
 }
-
-/* 滑過微亮 */
 .power-name:hover {
   filter: brightness(1.4) drop-shadow(0 0 8px rgba(255,255,255,0.3));
 }
 
-
-/* 滑出玻璃卡 */
 .power-info {
   position: fixed;
   top: 50%;
@@ -534,15 +518,14 @@ nav.mobile-active a:hover { color:var(--accent); }
     padding: 16px;
   }
 
-  /* ✅ 手機版玻璃卡寬度調整 */
   .power-info {
     width: 90%;
     max-width: 500px;
-    left: -110%; /* ← 從畫面左側滑入 */
+    left: -110%;
   }
 
   .power-info.active {
-    left: 50%; /* ← 停在中間 */
+    left: 50%; 
     transform: translate(-50%, -50%);
   }
 }
@@ -621,7 +604,6 @@ footer {
   line-height: 1.6;
 }
 
-/* 手機優化 */
 @media (max-width: 768px) {
   .news-list {
     gap: 10px;
@@ -631,7 +613,6 @@ footer {
   }
 }
 
-/* 回到上層按鈕 */
 #back-to-top {
   position: fixed;
   bottom: 30px;
@@ -681,7 +662,6 @@ footer {
   box-shadow: 0 0 25px rgba(104,176,240,0.4);
 }
 
-/* 地圖展開區 */
 .map-wrapper {
   max-width: 1000px;
   width: 90%;
@@ -697,10 +677,10 @@ footer {
   transition: max-height 0.9s ease, opacity 0.6s ease;
 }
 
-/* 展開後狀態 */
+
 .map-wrapper.active {
   opacity: 1;
-  max-height: 1200px; /* 可依地圖長寬微調 */
+  max-height: 1200px;
 }
 
 .map-wrapper img {
@@ -734,7 +714,6 @@ footer {
     padding: 6px;
   }
 
-  /* 修正間距：縮短上下空白 */
   #map-section {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -794,7 +773,7 @@ footer {
   margin-left: 40px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* 按鈕置中 */
+  align-items: center;
 }
 
 .preview-info button {
@@ -870,8 +849,6 @@ footer {
   filter: blur(40px);
   z-index: 0;
 }
-
-/* === 最新消息卡片光感升級 === */
 .news-item {
   position: relative;
   background: rgba(255,255,255,0.04);
@@ -887,12 +864,15 @@ footer {
   box-shadow: inset 0 0 10px rgba(104,176,240,0.12), 0 8px 28px rgba(104,176,240,0.25);
   transform: translateY(-3px);
 }
-
-/* === 標題發光效果 === */
 .promo-card h3 {
   text-shadow: 0 0 10px rgba(104,176,240,0.4);
 }
 .news-item .date {
   font-weight: 600;
   letter-spacing: 1px;
+}
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
