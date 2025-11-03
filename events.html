@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ECLIPSTONE - 年紀事</title>
+<title>ECLIPSTONE - 事件欄</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
 <style>
@@ -31,7 +31,7 @@ nav a {
   color:var(--muted); text-decoration:none; margin-left:20px; font-size:14px;
 }
 nav a:hover { color:var(--accent); }
-/* ====== 手機選單（與首頁一致） ====== */
+
 .menu-toggle {
   display:none;
   flex-direction:column;
@@ -57,7 +57,7 @@ nav a:hover { color:var(--accent); }
   transform:translateY(-7px) rotate(-45deg);
 }
 
-/* 展開的選單樣式 */
+/* 展開ㄉ選單 */
 nav.mobile-active {
   position:absolute;
   top:65px; right:18px;
@@ -82,7 +82,6 @@ nav.mobile-active a {
 }
 nav.mobile-active a:hover { color:var(--accent); }
 
-/* 小螢幕控制 */
 @media (max-width: 768px) {
   nav:not(.mobile-active) { display:none; }
   .menu-toggle { display:flex; }
@@ -94,7 +93,7 @@ main {
   max-width:900px; margin:120px auto 60px; padding:20px;
 }
 
-/* === 事件卡 === */
+/* === 事件區 === */
 .event-card {
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.08);
@@ -140,7 +139,7 @@ main {
 }
 
 .event-card.active .event-text {
-  max-height:500px; /* 展開高度 */
+  max-height:500px;
 }
 .copy-btn {
   display:none;
@@ -210,9 +209,7 @@ nav.mobile-active a {
 nav.mobile-active a:hover {
   color: var(--accent);
 }
-/* === 事件頁光感升級 === */
 
-/* 整體背景光霧 */
 body::before {
   content: "";
   position: fixed;
@@ -228,7 +225,6 @@ body::before {
   to { background-position: 100% 100%; }
 }
 
-/* 事件卡立體層次＋hover光暈 */
 .event-card {
   position: relative;
   background: rgba(255,255,255,0.04);
@@ -246,7 +242,6 @@ body::before {
   transform: translateY(-3px);
 }
 
-/* 展開動畫淡入柔滑 */
 .event-card.active .event-text {
   animation: expandEvent 0.4s ease forwards;
 }
@@ -363,3 +358,4 @@ document.querySelectorAll('nav a').forEach(link => {
 </body>
 
 </html>
+
