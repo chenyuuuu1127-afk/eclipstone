@@ -307,7 +307,28 @@ header h1 a:hover {
   position: relative;
   z-index: 1;
 }
+#events-title {
+  text-align: center;
+  margin: 100px auto 60px;
+  max-width: 900px;
+  color: var(--text);
+}
 
+#events-title .section-title {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 60px;
+  margin: 0 auto 25px;
+  filter: drop-shadow(0 0 6px rgba(104,176,240,0.4));
+}
+
+#events-title p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.9;
+  white-space: pre-line;
+}
 </style>
 </head>
 <body>
@@ -319,7 +340,11 @@ header h1 a:hover {
     <a href="index.html#map">地圖</a>
   </nav>
 </header>
-
+<section id="events-title" class="fade-in">
+  <h3 class="section-title" style="background-image:url('images/EVENTS.png'); width:230px; height:60px;"></h3>
+  <p>提供開局範本、算圖提示詞等文字複製。
+  ※提醒您※ 若您使用手機瀏覽器，請關閉自動翻譯功能，以避免複製文字時發生格式錯誤。</p>
+</section>
 <main>
   <div class="event-card" onclick="toggleEvent(this)">
     <div class="date">2025.11.03　【開局範本一】</div>
@@ -499,3 +524,4 @@ function showCenterPulse(message) {
 </body>
 
 </html>
+
