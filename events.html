@@ -139,7 +139,8 @@ main {
 }
 
 .event-card.active .event-text {
-  max-height:500px;
+  max-height:none;
+  overflow:visible;
 }
 .copy-btn {
   display:none;
@@ -160,6 +161,22 @@ main {
 .copy-btn:hover {
   background:rgba(104,176,240,0.2);
   box-shadow:0 0 10px rgba(104,176,240,0.4);
+}
+  .copy-btn {
+  display: none;
+  margin-bottom: 12px;
+  border: 1px solid rgba(104,176,240,0.5);
+  background: rgba(104,176,240,0.1);
+  color: #e6edf5;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Orbitron", sans-serif;
+  font-size: 13px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.event-card.active .copy-btn {
+  display: inline-block;
 }
 
 footer {
@@ -309,7 +326,7 @@ header h1 a:hover {
 }
 #events-title {
   text-align: center;
-  margin: 100px auto 60px;
+  margin: 100px auto 40px;
   max-width: 900px;
   color: var(--text);
 }
@@ -328,6 +345,11 @@ header h1 a:hover {
   color: var(--muted);
   line-height: 1.9;
   white-space: pre-line;
+}
+  @media (max-width: 768px) {
+  #events-title {
+    padding: 0 24px;  /* 左右預留空間 */
+  }
 }
 </style>
 </head>
@@ -348,6 +370,7 @@ header h1 a:hover {
 <main>
   <div class="event-card" onclick="toggleEvent(this)">
     <div class="date">2025.11.03　【開局範本一】</div>
+     <button class="copy-btn" onclick="copyEvent(event, 'e1')">一鍵複製</button>
     <div class="event-text" id="e1">§ 嘿，你終於醒了 §
 > [Tick. 1][春季｜5月1日 14:20]
 > [地點：破爛運輸車隊內部]
@@ -390,11 +413,11 @@ header h1 a:hover {
 年輕人：「……」
 
 *遠處傳來異獸的吼叫，車隊加快了速度。*</div>
-    <button class="copy-btn" onclick="copyEvent(event, 'e1')">一鍵複製</button>
   </div>
 
   <div class="event-card" onclick="toggleEvent(this)">
     <div class="date">2025.11.03 【開局範本二】</div>
+        <button class="copy-btn" onclick="copyEvent(event, 'e2')">一鍵複製</button>
     <div class="event-text" id="e2">**§ 黑街特產：驚喜木箱 §**
 > [Tick. 1][春季｜5月1日 14:20]
 > [地點：黑街運輸途中（箱內）]
@@ -450,30 +473,28 @@ header h1 a:hover {
 *就在此時，輕微的腳步聲接近，木箱外突然傳來一道陌生的聲音：*
 
 「……箱子裡有活人？」</div>
-    <button class="copy-btn" onclick="copyEvent(event, 'e2')">一鍵複製</button>
   </div>
 
   <div class="event-card" onclick="toggleEvent(this)">
     <div class="date">【prompt】嚴烈</div>
-    <div class="event-text" id="e3">solo, mature handsome male, short black hair, red eyes, wearing black suit, serious expression, confident aura, no beard, clean lineart, soft shading, white background, full body, soft lighting, high quality illustration, 8k, masterpiece, simple composition</div>
     <button class="copy-btn" onclick="copyEvent(event, 'e3')">一鍵複製</button>
+    <div class="event-text" id="e3">solo, mature handsome male, short black hair, red eyes, wearing black suit, serious expression, confident aura, no beard, clean lineart, soft shading, white background, full body, soft lighting, high quality illustration, 8k, masterpiece, simple composition</div>
   </div>
 
     <div class="event-card" onclick="toggleEvent(this)">
     <div class="date">【prompt】霆霄</div>
-    <div class="event-text" id="e4">solo, mature beautiful male, shoulder-length wavy golden hair, blue eyes, wearing silky white shirt and black pants, looking with sly smirk, teasing and cunning expression, confident aura, no beard, white background, clean lineart, soft shading, high quality illustration, 8k, masterpiece</div>
     <button class="copy-btn" onclick="copyEvent(event, 'e4')">一鍵複製</button>
-  </div>
+    <div class="event-text" id="e4">solo, mature beautiful male, shoulder-length wavy golden hair, blue eyes, wearing silky white shirt and black pants, looking with sly smirk, teasing and cunning expression, confident aura, no beard, white background, clean lineart, soft shading, high quality illustration, 8k, masterpiece</div>
+     </div>
 
     <div class="event-card" onclick="toggleEvent(this)">
     <div class="date">【prompt】段星野</div>
-    <div class="event-text" id="5">solo, handsome male, black hair and black eyes, wearing tactical battle outfit with hood, calm expression, relaxed posture, white background, clean lineart, soft lighting, high quality illustration, 8k, masterpiece</div>
     <button class="copy-btn" onclick="copyEvent(event, 'e5')">一鍵複製</button>
-  </div>
+    <div class="event-text" id="5">solo, handsome male, black hair and black eyes, wearing tactical battle outfit with hood, calm expression, relaxed posture, white background, clean lineart, soft lighting, high quality illustration, 8k, masterpiece</div>
+    </div>
 </main>
 
-<footer>© 2025 by Chen Yu. Powered and secured by Lovey-Dovey:ECLIPSTONE</footer>
-
+<footer>© 2025 by Chen Yu. Powered and secured by Lovey-Dovey:ECLIPSTONE. This site includes visual content partially created with AI technology.</footer>
 <script>
 function toggleEvent(card) {
   card.classList.toggle('active');
@@ -524,5 +545,6 @@ function showCenterPulse(message) {
 </body>
 
 </html>
+
 
 
