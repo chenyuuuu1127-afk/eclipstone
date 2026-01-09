@@ -26,7 +26,6 @@ body {
   overflow: hidden;
 }
 
-/* 標題設定 */
 h2 {
   font-family: "Orbitron", sans-serif;
   color: var(--accent);
@@ -100,10 +99,10 @@ button:hover {
 
 <body>
   <h2>年齡確認</h2>
-  <p>您即將進入的網頁包含可能不怎麼18+的暴力內容。<br>請確認您的年齡以繼續。</p>
+  <p>您即將進入的網頁包含12+的內容，沒錯，這只是一個進入確認用按鈕。<br>請確認您的年齡滿12歲以繼續。</p>
 
   <div>
-    <button onclick="confirmAge(true)">✔ 我是大人了</button>
+    <button onclick="confirmAge(true)">✔ 我是12歲大人了</button>
     <button onclick="confirmAge(false)">✖ 咕咕嘎嘎</button>
   </div>
 
@@ -114,11 +113,9 @@ function confirmAge(isAdult) {
   const notice = document.getElementById('notice');
 
   if (isAdult) {
-    // 年齡通過
     localStorage.setItem('ageVerified', 'true');
     window.location.href = "./index.html";
   } else {
-    // 未滿18歲
     notice.classList.add('visible');
     setTimeout(() => {
       notice.classList.remove('visible');
@@ -128,6 +125,7 @@ function confirmAge(isAdult) {
 </script>
 </body>
 </html>
+
 
 
 
